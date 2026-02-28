@@ -780,6 +780,62 @@ function animateRing() {
 animateRing();
 </script>
 
+<script>
+/* ── ETC Debug Banner — store.html ─────────────────────────── */
+(function () {
+  if (new URLSearchParams(location.search).get('debug') !== 'true') return;
+
+  const lsLoaded = typeof window.createLemonSqueezy === 'function'
+    || document.querySelector('script[src*="lemonsqueezy"]') !== null;
+
+  const buttons = Array.from(document.querySelectorAll('.lemonsqueezy-button'));
+  const hasPlaceholders = buttons.some(b => b.href && b.href.includes('PRODUCT_ID'));
+
+  const banner = document.createElement('div');
+  banner.style.cssText = [
+    'position:fixed','bottom:0','left:0','right:0','z-index:99999',
+    'background:rgba(3,3,8,0.97)','border-top:2px solid #00f5ff',
+    'font-family:monospace','font-size:13px','padding:14px 20px',
+    'display:flex','flex-wrap:wrap','gap:20px','align-items:center',
+  ].join(';');
+
+  const mkPill = (ok, label) => {
+    const s = document.createElement('span');
+    s.style.cssText = `display:inline-flex;align-items:center;gap:6px;background:${ok?'rgba(0,245,255,0.12)':'rgba(255,60,60,0.15)'};border:1px solid ${ok?'#00f5ff':'#ff3c3c'};color:${ok?'#00f5ff':'#ff6b6b'};padding:3px 10px;font-size:12px;`;
+    s.innerHTML = `<span>${ok?'✓':'✗'}</span> ${label}`;
+    return s;
+  };
+
+  const title = document.createElement('span');
+  title.style.cssText = 'color:#ffd700;font-weight:bold;letter-spacing:2px;font-size:11px;text-transform:uppercase;';
+  title.textContent = '⚡ ETC Debug — /store';
+  banner.appendChild(title);
+  banner.appendChild(mkPill(lsLoaded, 'Lemon Squeezy JS loaded'));
+  banner.appendChild(mkPill(buttons.length > 0, `${buttons.length} checkout button(s)`));
+  banner.appendChild(mkPill(!hasPlaceholders, hasPlaceholders ? 'Placeholder IDs — needs real variant IDs' : 'All checkout URLs live'));
+
+  buttons.forEach((b, i) => {
+    const s = document.createElement('span');
+    s.style.cssText = `color:${b.href && b.href.includes('PRODUCT_ID') ? '#ff6b6b' : '#6b6b8a'};font-size:11px;`;
+    s.textContent = `btn[${i}]: ${(b.href||'no href').replace('https://evolvethecosmos.lemonsqueezy.com/checkout/buy/','buy/').substring(0,55)}`;
+    banner.appendChild(s);
+  });
+
+  const close = document.createElement('button');
+  close.textContent = '✕';
+  close.style.cssText = 'margin-left:auto;background:none;border:none;color:#6b6b8a;font-size:18px;cursor:pointer;';
+  close.onclick = () => banner.remove();
+  banner.appendChild(close);
+  document.body.appendChild(banner);
+
+  console.group('%c ETC /store Debug ', 'background:#030308;color:#00f5ff;font-weight:bold;padding:2px 8px;border:1px solid #00f5ff;');
+  console.log('LS JS loaded:', lsLoaded);
+  console.log('Buttons:', buttons.length, '| Placeholders:', hasPlaceholders);
+  buttons.forEach((b, i) => console.log(`  [${i}]`, b.href||'no href'));
+  console.groupEnd();
+})();
+</script>
+
 <!-- Evolve The Cosmos | evolvethecosmos.com/store -->
 </body>
 </html>

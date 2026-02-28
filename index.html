@@ -642,6 +642,82 @@ window.addEventListener('resize', () => {
 });
 </script>
 
+<script>
+/* ── ETC Debug Banner ──────────────────────────────────────────
+   Visible only when ?debug=true is in the URL.
+   Shows Lemon Squeezy load status and checkout link audit.
+   Never shows in production traffic.
+─────────────────────────────────────────────────────────────── */
+(function () {
+  if (new URLSearchParams(location.search).get('debug') !== 'true') return;
+
+  // Check if LS JS loaded
+  const lsLoaded = typeof window.createLemonSqueezy === 'function'
+    || document.querySelector('script[src*="lemonsqueezy"]') !== null;
+
+  // Audit all checkout buttons on the page
+  const buttons = Array.from(document.querySelectorAll('.lemonsqueezy-button'));
+  const hasPlaceholders = buttons.some(b => b.href && b.href.includes('PRODUCT_ID'));
+
+  const banner = document.createElement('div');
+  banner.id = 'etc-debug-banner';
+  banner.style.cssText = [
+    'position:fixed','bottom:0','left:0','right:0','z-index:99999',
+    'background:rgba(3,3,8,0.97)','border-top:2px solid #00f5ff',
+    'font-family:monospace','font-size:13px','padding:14px 20px',
+    'display:flex','flex-wrap:wrap','gap:20px','align-items:center',
+  ].join(';');
+
+  const mkPill = (ok, label) => {
+    const s = document.createElement('span');
+    s.style.cssText = `
+      display:inline-flex;align-items:center;gap:6px;
+      background:${ok ? 'rgba(0,245,255,0.12)' : 'rgba(255,60,60,0.15)'};
+      border:1px solid ${ok ? '#00f5ff' : '#ff3c3c'};
+      color:${ok ? '#00f5ff' : '#ff6b6b'};
+      padding:3px 10px;border-radius:2px;font-size:12px;
+    `;
+    s.innerHTML = `<span>${ok ? '✓' : '✗'}</span> ${label}`;
+    return s;
+  };
+
+  const title = document.createElement('span');
+  title.style.cssText = 'color:#ffd700;font-weight:bold;letter-spacing:2px;font-size:11px;text-transform:uppercase;';
+  title.textContent = '⚡ ETC Debug';
+
+  banner.appendChild(title);
+  banner.appendChild(mkPill(lsLoaded,     'Lemon Squeezy JS loaded'));
+  banner.appendChild(mkPill(buttons.length > 0, `${buttons.length} checkout button(s) found`));
+  banner.appendChild(mkPill(!hasPlaceholders,    hasPlaceholders ? 'Placeholder IDs detected — wire up real IDs' : 'All checkout URLs live'));
+
+  // List each button
+  buttons.forEach((b, i) => {
+    const isPlaceholder = b.href && b.href.includes('PRODUCT_ID');
+    const label = document.createElement('span');
+    label.style.cssText = `color:${isPlaceholder ? '#ff6b6b' : '#6b6b8a'};font-size:11px;`;
+    label.textContent = `btn[${i}]: ${b.href ? b.href.replace('https://evolvethecosmos.lemonsqueezy.com/checkout/buy/', 'buy/').substring(0, 50) : 'no href'}`;
+    banner.appendChild(label);
+  });
+
+  // Close button
+  const close = document.createElement('button');
+  close.textContent = '✕';
+  close.style.cssText = 'margin-left:auto;background:none;border:none;color:#6b6b8a;font-size:18px;cursor:pointer;padding:0 4px;';
+  close.onclick = () => banner.remove();
+  banner.appendChild(close);
+
+  document.body.appendChild(banner);
+
+  // Also log to console
+  console.group('%c ETC Checkout Debug ', 'background:#030308;color:#00f5ff;font-weight:bold;padding:2px 8px;border:1px solid #00f5ff;');
+  console.log('Lemon Squeezy JS loaded:', lsLoaded);
+  console.log('Checkout buttons found:', buttons.length);
+  console.log('Has placeholder IDs:', hasPlaceholders);
+  buttons.forEach((b, i) => console.log(`  Button ${i}:`, b.href || 'no href'));
+  console.groupEnd();
+})();
+</script>
+
 <!-- Evolve The Cosmos | evolvethecosmos.com -->
 </body>
 </html>
