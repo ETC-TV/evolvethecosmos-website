@@ -381,6 +381,10 @@
     color: var(--black);
     border-color: var(--accent);
   }
+  .card-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
 
   .divider {
     width: 100%;
@@ -547,7 +551,7 @@
       <h3>Neuro-Dashboard</h3>
       <p>AI-powered cognitive performance tracking dashboard with personalized neuroscience protocols and biometric insights.</p>
       <span class="card-price">$97 <span class="card-price-sub">one-time</span></span>
-      <a href="mailto:support@evolvethecosmos.com" class="card-btn">Get Access</a>
+      <button onclick="checkout('basic')" class="card-btn" id="btn-basic">Get Access</button>
     </div>
     <div class="card">
       <span class="card-num">02</span>
@@ -555,7 +559,7 @@
       <h3>AI Automation Blueprint</h3>
       <p>Complete autonomous content pipeline blueprint. Scripts, templates, workflows, and automation recipes included.</p>
       <span class="card-price">$197 <span class="card-price-sub">one-time</span></span>
-      <a href="mailto:support@evolvethecosmos.com" class="card-btn">Get Access</a>
+      <button onclick="checkout('pro')" class="card-btn" id="btn-pro">Get Access</button>
     </div>
     <div class="card">
       <span class="card-num">03</span>
@@ -563,7 +567,7 @@
       <h3>Local AI Consulting</h3>
       <p>Custom AI automation setup for your small business. Local infrastructure deployment, workflow configuration, and training.</p>
       <span class="card-price">$297 <span class="card-price-sub">one-time</span></span>
-      <a href="mailto:support@evolvethecosmos.com" class="card-btn">Get Access</a>
+      <button onclick="checkout('elite')" class="card-btn" id="btn-elite">Get Access</button>
     </div>
   </div>
 </section>
@@ -639,6 +643,35 @@ window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
+</script>
+
+<script>
+async function checkout(tier) {
+  const btn = document.getElementById('btn-' + tier);
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Loading...';
+
+  try {
+    const res = await fetch('/create-checkout-session/' + tier, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const data = await res.json();
+
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert('Something went wrong. Please try again.');
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  } catch (err) {
+    alert('Unable to connect to payment server. Please try again.');
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+}
 </script>
 
 <!-- Evolve The Cosmos | evolvethecosmos.com -->
