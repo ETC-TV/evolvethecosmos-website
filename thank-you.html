@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmed — Evolve The Cosmos</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000;
+    --deep: #030308;
+    --accent: #00f5ff;
+    --accent2: #7b2fff;
+    --gold: #ffd700;
+    --white: #e8e8f0;
+    --dim: #6b6b8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  .grid-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .scanline {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  nav {
+    position: relative;
+    z-index: 10;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,245,255,0.1);
+    background: rgba(3,3,8,0.9);
+    backdrop-filter: blur(20px);
+  }
+
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .logo span { color: var(--gold); }
+
+  .main {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+  }
+
+  .container {
+    max-width: 720px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .pulse-ring {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 40px;
+    position: relative;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .pulse-ring::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,245,255,0.2);
+    animation: pulse 2s ease-in-out 0.3s infinite;
+  }
+
+  .pulse-ring::after {
+    content: '';
+    position: absolute;
+    inset: -24px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,245,255,0.08);
+    animation: pulse 2s ease-in-out 0.6s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.05); }
+  }
+
+  .check-emoji {
+    font-size: 40px;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tag {
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: 'Orbitron', monospace;
+    margin-bottom: 20px;
+    display: block;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    color: var(--dim);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0 auto 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .steps-card {
+    background: rgba(0,245,255,0.03);
+    border: 1px solid rgba(0,245,255,0.12);
+    padding: 40px;
+    margin-bottom: 40px;
+    text-align: left;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .steps-card h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .steps-card h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,215,0,0.3), transparent);
+  }
+
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .step:last-child { margin-bottom: 0; }
+
+  .step-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    font-weight: 900;
+    color: var(--black);
+    background: var(--accent);
+    padding: 5px 9px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+  }
+
+  .step-body {
+    flex: 1;
+  }
+
+  .step-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .step-desc {
+    font-size: 15px;
+    color: var(--dim);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .step-desc strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .divider-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,245,255,0.15), transparent);
+    margin: 8px 0 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    padding: 14px 36px;
+    background: var(--accent);
+    color: var(--black);
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+
+  .btn-primary:hover {
+    background: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 48px rgba(0,245,255,0.25);
+  }
+
+  .btn-secondary {
+    padding: 14px 36px;
+    background: transparent;
+    color: var(--accent);
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(0,245,255,0.3);
+    display: inline-block;
+    transition: all 0.3s ease;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    background: rgba(0,245,255,0.05);
+    transform: translateY(-2px);
+  }
+
+  footer {
+    position: relative;
+    z-index: 2;
+    padding: 32px 48px;
+    border-top: 1px solid rgba(0,245,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer p {
+    color: var(--dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .main { padding: 60px 20px; }
+    .steps-card { padding: 28px 24px; }
+    footer { padding: 24px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+<div class="scanline"></div>
+
+<nav>
+  <a href="/" class="logo">Evolve <span>The</span> Cosmos</a>
+</nav>
+
+<main class="main">
+  <div class="container">
+
+    <div class="pulse-ring">
+      <span class="check-emoji">✓</span>
+    </div>
+
+    <span class="tag">// Order Confirmed</span>
+    <h1>Your Evolution<br>Starts <em>Now</em></h1>
+    <p class="subtitle">
+      Payment received. Your product is on its way.
+      Check your email for access instructions and download links.
+    </p>
+
+    <div class="steps-card">
+      <h2>// Access Instructions</h2>
+
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-body">
+          <div class="step-title">Check Your Email</div>
+          <div class="step-desc">Lemon Squeezy will send your <strong>order receipt and download link</strong> to the email you used at checkout — usually within 60 seconds.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-body">
+          <div class="step-title">Check Spam / Promotions</div>
+          <div class="step-desc">If you don't see it in your inbox within 5 minutes, check your <strong>spam or promotions folder</strong> — the email comes from Lemon Squeezy on our behalf.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-body">
+          <div class="step-title">Download & Install</div>
+          <div class="step-desc">Open your download link, save the files, and follow the <strong>setup guide included</strong> to get your product fully operational.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-num">04</span>
+        <div class="step-body">
+          <div class="step-title">Need Help?</div>
+          <div class="step-desc">Email us at <strong>support@evolvethecosmos.com</strong> with your order number and we'll get you sorted within 24 hours.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <div class="actions">
+      <a href="/store" class="btn-primary">Browse More Products</a>
+      <a href="/" class="btn-secondary">Return Home</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 Evolve The Cosmos LLC. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="/privacy-policy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="mailto:support@evolvethecosmos.com">Support</a>
+  </div>
+</footer>
+
+</body>
+</html>
