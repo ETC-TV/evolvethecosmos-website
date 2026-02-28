@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="tiktok-domain-verification" content="Wl0oQ7HvUjOt9YWV0tSrdltX7yJshQg1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolve The Cosmos — AI-Powered Cognitive Evolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000;
+    --deep: #030308;
+    --accent: #00f5ff;
+    --accent2: #7b2fff;
+    --gold: #ffd700;
+    --white: #e8e8f0;
+    --dim: #6b6b8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    box-shadow: 0 0 20px var(--accent);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    opacity: 0.5;
+  }
+
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .grid-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,245,255,0.1);
+    background: rgba(3,3,8,0.8);
+    backdrop-filter: blur(20px);
+  }
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 40px; }
+  .nav-links a {
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    font-weight: 500;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 48px 80px;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(42px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+  .line1 { display: block; color: var(--white); }
+  .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--dim);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    padding: 16px 40px;
+    background: var(--accent);
+    color: var(--black);
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+  .btn-primary:hover {
+    background: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 60px rgba(0,245,255,0.3);
+  }
+
+  .btn-secondary {
+    padding: 16px 40px;
+    background: transparent;
+    color: var(--accent);
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(0,245,255,0.4);
+    display: inline-block;
+    transition: all 0.3s ease;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    background: rgba(0,245,255,0.05);
+    transform: translateY(-2px);
+  }
+
+  .orbital {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0,245,255,0.1);
+    animation: rotate var(--dur) linear infinite;
+    pointer-events: none;
+  }
+  @keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .stats {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(0,245,255,0.1);
+    border-top: 1px solid rgba(0,245,255,0.1);
+    border-bottom: 1px solid rgba(0,245,255,0.1);
+  }
+  .stat {
+    padding: 48px 40px;
+    background: var(--deep);
+    text-align: center;
+    transition: background 0.3s;
+  }
+  .stat:hover { background: rgba(0,245,255,0.03); }
+  .stat-number {
+    font-family: 'Orbitron', monospace;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-number span { font-size: 28px; }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-top: 12px;
+  }
+
+  section {
+    position: relative;
+    z-index: 2;
+    padding: 120px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 20px;
+    font-family: 'Orbitron', monospace;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: var(--white);
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--dim);
+    max-width: 600px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: rgba(0,245,255,0.08);
+    margin-top: 64px;
+    border: 1px solid rgba(0,245,255,0.08);
+  }
+
+  .card {
+    background: var(--deep);
+    padding: 48px 40px;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .card:hover { background: rgba(0,245,255,0.02); }
+  .card:hover::before { transform: scaleX(1); }
+
+  .card-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 48px;
+    font-weight: 900;
+    color: rgba(0,245,255,0.05);
+    line-height: 1;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .card-icon {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .card h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .card p {
+    font-size: 15px;
+    color: var(--dim);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .card-price {
+    font-family: 'Orbitron', monospace;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--accent);
+    margin-top: 28px;
+    display: block;
+  }
+  .card-price-sub {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 2px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 400;
+    margin-left: 6px;
+  }
+  .card-btn {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid rgba(0,245,255,0.3);
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .card-btn:hover {
+    background: var(--accent);
+    color: var(--black);
+    border-color: var(--accent);
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,245,255,0.2), transparent);
+    position: relative;
+    z-index: 2;
+  }
+
+  footer {
+    position: relative;
+    z-index: 2;
+    padding: 48px;
+    border-top: 1px solid rgba(0,245,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  footer p {
+    color: var(--dim);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a {
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scanline {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .stats { grid-template-columns: 1fr; }
+    section { padding: 80px 24px; }
+    .cards { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scanline"></div>
+<div class="grid-overlay"></div>
+<canvas class="stars" id="stars"></canvas>
+
+<nav>
+  <div class="logo">Evolve <span>The</span> Cosmos</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="orbital" style="width:600px;height:600px;top:50%;left:50%;--dur:40s;"></div>
+  <div class="orbital" style="width:900px;height:900px;top:50%;left:50%;--dur:70s;border-color:rgba(123,47,255,0.08);"></div>
+  <div class="orbital" style="width:1200px;height:1200px;top:50%;left:50%;--dur:100s;border-color:rgba(255,215,0,0.04);"></div>
+
+  <p class="hero-tag">Cognitive Evolution & AI Automation</p>
+  <h1>
+    <span class="line1">Evolve The</span>
+    <span class="line2">Cosmos</span>
+  </h1>
+  <p class="hero-sub">
+    Harnessing artificial intelligence to accelerate human potential.
+    We build autonomous content systems and AI-powered tools for the next era of cognitive evolution.
+  </p>
+  <div class="hero-cta">
+    <a href="#products" class="btn-primary">View Products</a>
+    <a href="#contact" class="btn-secondary">Get In Touch</a>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-number">40<span>s</span></div>
+    <div class="stat-label">Video Production Time</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">$0<span>.02</span></div>
+    <div class="stat-label">Cost Per Video</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">99<span>%</span></div>
+    <div class="stat-label">Automated Pipeline</div>
+  </div>
+</div>
+
+<section id="about">
+  <span class="section-tag">// Who We Are</span>
+  <h2 class="section-title">AI-Native.<br>Local-First. Autonomous.</h2>
+  <p class="section-sub">
+    Evolve The Cosmos is an AI-powered content and digital products platform focused on cognitive evolution, neuroscience, and technology. We help individuals and businesses leverage artificial intelligence to operate at unprecedented scale.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<section id="services">
+  <span class="section-tag">// What We Build</span>
+  <h2 class="section-title">Services &<br>Capabilities</h2>
+  <div class="cards">
+    <div class="card">
+      <span class="card-num">01</span>
+      <span class="card-icon">⚡</span>
+      <h3>AI Automation</h3>
+      <p>End-to-end autonomous content pipelines for businesses ready to scale without limits. From ideation to publication in seconds.</p>
+    </div>
+    <div class="card">
+      <span class="card-num">02</span>
+      <span class="card-icon">🧠</span>
+      <h3>Neuro Dashboard</h3>
+      <p>Track, optimize, and evolve your cognitive performance with AI-driven biometric insights and personalized protocols.</p>
+    </div>
+    <div class="card">
+      <span class="card-num">03</span>
+      <span class="card-icon">🚀</span>
+      <h3>Local AI Consulting</h3>
+      <p>Deploy powerful local AI infrastructure for your small business. Zero cloud dependency. Maximum privacy. Infinite scale.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="products">
+  <span class="section-tag">// Pricing</span>
+  <h2 class="section-title">Digital Products<br>& Services</h2>
+  <p class="section-sub">All products are delivered digitally. One-time purchase. Instant access. No subscriptions.</p>
+  <div class="cards">
+    <div class="card">
+      <span class="card-num">01</span>
+      <span class="card-icon">🧠</span>
+      <h3>Neuro-Dashboard</h3>
+      <p>AI-powered cognitive performance tracking dashboard with personalized neuroscience protocols and biometric insights.</p>
+      <span class="card-price">$97 <span class="card-price-sub">one-time</span></span>
+      <a href="mailto:support@evolvethecosmos.com" class="card-btn">Get Access</a>
+    </div>
+    <div class="card">
+      <span class="card-num">02</span>
+      <span class="card-icon">⚡</span>
+      <h3>AI Automation Blueprint</h3>
+      <p>Complete autonomous content pipeline blueprint. Scripts, templates, workflows, and automation recipes included.</p>
+      <span class="card-price">$197 <span class="card-price-sub">one-time</span></span>
+      <a href="mailto:support@evolvethecosmos.com" class="card-btn">Get Access</a>
+    </div>
+    <div class="card">
+      <span class="card-num">03</span>
+      <span class="card-icon">🚀</span>
+      <h3>Local AI Consulting</h3>
+      <p>Custom AI automation setup for your small business. Local infrastructure deployment, workflow configuration, and training.</p>
+      <span class="card-price">$297 <span class="card-price-sub">one-time</span></span>
+      <a href="mailto:support@evolvethecosmos.com" class="card-btn">Get Access</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <span class="section-tag">// Connect</span>
+  <h2 class="section-title">Ready To<br>Evolve?</h2>
+  <p class="section-sub">
+    Join the next frontier of human-AI collaboration. Reach out to explore how we can build the future together.
+  </p>
+  <div style="margin-top:48px;">
+    <a href="mailto:support@evolvethecosmos.com" class="btn-primary">Contact Us</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Evolve The Cosmos LLC. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms & Conditions</a>
+  </div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top = my - 6 + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx - 18 + 'px';
+  ring.style.top = ry - 18 + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const starArr = Array.from({length: 200}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  r: Math.random() * 1.5,
+  speed: 0.002 + Math.random() * 0.005,
+  phase: Math.random() * Math.PI * 2
+}));
+
+function drawStars(t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  starArr.forEach(s => {
+    const a = 0.1 + 0.9 * Math.abs(Math.sin(t * s.speed + s.phase));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${a})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+requestAnimationFrame(drawStars);
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+<!-- Evolve The Cosmos | evolvethecosmos.com -->
+</body>
+</html>

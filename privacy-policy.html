@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Evolve The Cosmos</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000;
+    --deep: #030308;
+    --cosmic: #0a0a1a;
+    --accent: #00f5ff;
+    --accent2: #7b2fff;
+    --gold: #ffd700;
+    --white: #e8e8f0;
+    --dim: #6b6b8a;
+    --body: #a0a0bc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--body);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  .grid-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,245,255,0.1);
+    background: rgba(3,3,8,0.95);
+    backdrop-filter: blur(20px);
+  }
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .logo span { color: var(--gold); }
+  .nav-right {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .doc-header {
+    position: relative;
+    z-index: 1;
+    padding: 80px 48px 64px;
+    border-bottom: 1px solid rgba(0,245,255,0.1);
+    background: linear-gradient(180deg, rgba(0,245,255,0.03) 0%, transparent 100%);
+  }
+  .doc-tag {
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .doc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    line-height: 1.1;
+  }
+  .doc-title span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .doc-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .doc-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .doc-meta-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .doc-meta-value {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 48px 120px;
+  }
+
+  .toc {
+    background: rgba(0,245,255,0.03);
+    border: 1px solid rgba(0,245,255,0.1);
+    border-left: 3px solid var(--accent);
+    padding: 40px;
+    margin-bottom: 80px;
+  }
+  .toc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 8px 40px;
+  }
+  .toc ol li {
+    counter-increment: toc;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .toc ol li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+    flex-shrink: 0;
+  }
+  .toc ol li a {
+    color: var(--body);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .toc ol li a:hover { color: var(--accent); }
+
+  .section {
+    margin-bottom: 72px;
+    padding-bottom: 72px;
+    border-bottom: 1px solid rgba(0,245,255,0.06);
+  }
+  .section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .section-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 32px 0 12px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: var(--body);
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  ul, ol {
+    margin: 16px 0 24px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  ul li, ol li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-size: 15px;
+    color: var(--body);
+    line-height: 1.7;
+  }
+
+  ul li::before {
+    content: '//';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    top: 10px;
+  }
+
+  ol { counter-reset: list; }
+  ol li { counter-increment: list; }
+  ol li::before {
+    content: counter(list, decimal-leading-zero) '.';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    top: 10px;
+  }
+
+  .highlight {
+    background: rgba(0,245,255,0.04);
+    border-left: 3px solid var(--accent);
+    padding: 24px 32px;
+    margin: 24px 0;
+  }
+  .highlight p { margin: 0; font-size: 14px; color: var(--white); }
+
+  .warning {
+    background: rgba(255,215,0,0.04);
+    border-left: 3px solid var(--gold);
+    padding: 24px 32px;
+    margin: 24px 0;
+  }
+  .warning p { margin: 0; font-size: 14px; color: var(--white); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+  th {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,245,255,0.2);
+    background: rgba(0,245,255,0.04);
+  }
+  td {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(0,245,255,0.06);
+    color: var(--body);
+    vertical-align: top;
+    line-height: 1.7;
+  }
+  tr:hover td { background: rgba(0,245,255,0.02); }
+
+  .contact-block {
+    background: rgba(123,47,255,0.06);
+    border: 1px solid rgba(123,47,255,0.2);
+    padding: 40px;
+    margin-top: 32px;
+  }
+  .contact-block p { margin: 0; }
+  .contact-block a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,245,255,0.3);
+    transition: border-color 0.2s;
+  }
+  .contact-block a:hover { border-color: var(--accent); }
+
+  a { color: var(--accent); }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 40px 48px;
+    border-top: 1px solid rgba(0,245,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: rgba(3,3,8,0.8);
+  }
+  footer p {
+    color: var(--dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a {
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .doc-header { padding: 60px 24px 48px; }
+    .container { padding: 60px 24px 80px; }
+    .toc ol { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; flex-direction: column; }
+    table { display: block; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+
+<nav>
+  <a href="/" class="logo">Evolve <span>The</span> Cosmos</a>
+  <span class="nav-right">Legal Documents</span>
+</nav>
+
+<div class="doc-header">
+  <span class="doc-tag">// Legal Terms</span>
+  <h1 class="doc-title">Privacy<br><span>Policy</span></h1>
+  <div class="doc-meta">
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Last Updated</span>
+      <span class="doc-meta-value">February 25, 2026</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Effective Date</span>
+      <span class="doc-meta-value">February 25, 2026</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Jurisdiction</span>
+      <span class="doc-meta-value">Florida, United States</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Entity</span>
+      <span class="doc-meta-value">Evolve The Cosmos LLC</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <div class="toc-title">// Table of Contents</div>
+    <ol>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#collection">Information We Collect</a></li>
+      <li><a href="#automatic">Automatically Collected Data</a></li>
+      <li><a href="#google">Google API Services</a></li>
+      <li><a href="#use">How We Use Your Information</a></li>
+      <li><a href="#sharing">Sharing Your Information</a></li>
+      <li><a href="#thirdparties">Third-Party Service Providers</a></li>
+      <li><a href="#ai">Artificial Intelligence Services</a></li>
+      <li><a href="#retention">Data Retention</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#rights">Your Privacy Rights</a></li>
+      <li><a href="#california">California Privacy Rights</a></li>
+      <li><a href="#usstates">US State Privacy Laws</a></li>
+      <li><a href="#gdpr">EU & UK Rights (GDPR)</a></li>
+      <li><a href="#children">Children's Privacy</a></li>
+      <li><a href="#updates">Updates to This Policy</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section" id="overview">
+    <span class="section-num">// 01</span>
+    <h2>Overview</h2>
+    <p>This Privacy Policy describes how Evolve The Cosmos LLC ("Company," "we," "us," or "our") collects, uses, and shares information about you when you visit evolvethecosmos.com (the "Site"), purchase our digital products or services, or interact with our content on third-party platforms including YouTube and TikTok.</p>
+    <div class="highlight">
+      <p>Please read this policy carefully. If you disagree with its terms, please discontinue use of the Site. Questions or concerns? Contact us at <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a>.</p>
+    </div>
+    <p>We are committed to protecting your personal information and your right to privacy. This policy applies to all information collected through our Site, digital products, email communications, and any related services.</p>
+  </div>
+
+  <!-- COLLECTION -->
+  <div class="section" id="collection">
+    <span class="section-num">// 02</span>
+    <h2>Information We Collect Directly</h2>
+    <p>We collect personal information that you voluntarily provide to us when you purchase a product, subscribe to our email list, or contact us. The categories of information we may collect include:</p>
+
+    <h3>Identity & Contact Data</h3>
+    <ul>
+      <li><strong style="color:var(--white)">Names</strong> — collected at email signup and checkout</li>
+      <li><strong style="color:var(--white)">Email addresses</strong> — core to our ConvertKit email marketing and order processing</li>
+      <li><strong style="color:var(--white)">Contact preferences</strong> — email marketing opt-in and opt-out preferences</li>
+    </ul>
+
+    <h3>Financial Data</h3>
+    <ul>
+      <li><strong style="color:var(--white)">Billing addresses</strong> — collected at checkout for digital product purchases</li>
+      <li><strong style="color:var(--white)">Payment card information</strong> — processed securely through Stripe and Gumroad. We do not store raw card numbers on our systems.</li>
+    </ul>
+
+    <h3>Sensitive Information</h3>
+    <p>We do not collect sensitive personal information such as Social Security numbers, government identification numbers, health or medical data, biometric identifiers, racial or ethnic origin, religious beliefs, sexual orientation, or precise geolocation data.</p>
+
+    <h3>Minors</h3>
+    <p>We do not knowingly collect data from or market to children under 18 years of age. If we learn that personal information from users under 18 has been collected, we will deactivate the account and delete such data promptly.</p>
+  </div>
+
+  <!-- AUTOMATIC -->
+  <div class="section" id="automatic">
+    <span class="section-num">// 03</span>
+    <h2>Automatically Collected Data</h2>
+    <p>We do not operate tracking scripts, cookies, pixels, beacons, or behavioral analytics tools on our Site. We do not collect derivative data such as IP addresses, device fingerprints, browser types, or individual user geolocation data.</p>
+    <div class="highlight">
+      <p>Third-party platforms we publish content on — including YouTube (Google LLC) and TikTok — collect their own analytics data from viewers independently, under their own privacy policies. We receive only aggregated, anonymized performance metrics (such as total views or engagement rates) through their APIs, not individual user data.</p>
+    </div>
+    <p>We do not use Google Analytics, Meta Pixel, or any other third-party tracking technology on our owned web properties.</p>
+  </div>
+
+  <!-- GOOGLE API -->
+  <div class="section" id="google">
+    <span class="section-num">// 04</span>
+    <h2>Google API Services</h2>
+    <p>We use the YouTube Data API v3 as a core component of our automated content publishing pipeline. This integration allows us to upload videos, manage metadata, organize playlists, and retrieve aggregate performance analytics.</p>
+    <div class="warning">
+      <p>Our use of Google API Services is subject to the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>. We do not use Google API data to develop, improve, or train generalized AI or machine learning models. We do not sell Google API data or use it for serving advertisements.</p>
+    </div>
+    <p>We do not use Google Maps API, Google Analytics API, Google Drive API, or Gmail API in our operations.</p>
+  </div>
+
+  <!-- USE -->
+  <div class="section" id="use">
+    <span class="section-num">// 05</span>
+    <h2>How We Use Your Information</h2>
+    <p>We use the information we collect for the following purposes:</p>
+    <ul>
+      <li>To deliver and facilitate delivery of digital products and services to you</li>
+      <li>To fulfill and manage your orders, payments, and digital product access</li>
+      <li>To send you administrative information including order confirmations and policy updates</li>
+      <li>To send you marketing and promotional communications (you may opt out at any time)</li>
+      <li>To respond to your inquiries and offer customer support</li>
+      <li>To request feedback and improve our products and services</li>
+      <li>To evaluate and improve our marketing and user experience</li>
+      <li>To identify usage trends through aggregate analytics</li>
+      <li>To determine the effectiveness of promotional campaigns</li>
+      <li>To protect our Services from fraud and unauthorized access</li>
+      <li>To comply with our legal obligations</li>
+    </ul>
+    <p>We will only use your personal information for the purposes listed above. If we need to use your information for a materially different purpose, we will notify you and obtain your consent where required by law.</p>
+  </div>
+
+  <!-- SHARING -->
+  <div class="section" id="sharing">
+    <span class="section-num">// 06</span>
+    <h2>Sharing Your Information</h2>
+    <p>We disclose your personal information to third-party service providers only as necessary to operate our business. We do not sell, trade, or rent your personal information to third parties for their own marketing purposes.</p>
+    <div class="highlight">
+      <p>We disclose information to third parties only — we do not sell or share your personal data for cross-context behavioral advertising or receive valuable consideration in exchange for your data.</p>
+    </div>
+    <p>We may share your information in the following circumstances:</p>
+    <ul>
+      <li><strong style="color:var(--white)">Service Providers:</strong> Third-party vendors who assist us in operating our business (see Section 07)</li>
+      <li><strong style="color:var(--white)">Legal Requirements:</strong> When required by law, court order, or governmental authority</li>
+      <li><strong style="color:var(--white)">Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets</li>
+      <li><strong style="color:var(--white)">Protection of Rights:</strong> To protect the rights, property, or safety of our Company, users, or others</li>
+    </ul>
+  </div>
+
+  <!-- THIRD PARTIES -->
+  <div class="section" id="thirdparties">
+    <span class="section-num">// 07</span>
+    <h2>Third-Party Service Providers</h2>
+    <p>We have entered into Data Processing Agreements with our third-party service providers, either explicitly or through their standard Terms of Service. The following table lists our service providers, their purpose, and what data they receive:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Service Provider</th>
+          <th>Purpose</th>
+          <th>Data Received</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--white)">ConvertKit</strong></td>
+          <td>Email marketing & lead capture</td>
+          <td>Name, email address, contact preferences</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">Stripe</strong></td>
+          <td>Payment processing</td>
+          <td>Name, billing address, payment card data</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">Gumroad</strong></td>
+          <td>Digital product sales</td>
+          <td>Name, email address, purchase data</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">YouTube (Google LLC)</strong></td>
+          <td>Content publishing via API</td>
+          <td>Video metadata, aggregate analytics</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">TikTok</strong></td>
+          <td>Content publishing via API</td>
+          <td>Video metadata, aggregate analytics</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">ElevenLabs</strong></td>
+          <td>AI voice synthesis</td>
+          <td>Script text for audio generation</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">Tailscale</strong></td>
+          <td>Secure network access</td>
+          <td>Device identity, network routing</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">Telegram</strong></td>
+          <td>System monitoring & notifications</td>
+          <td>Operational system status data</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Affiliate Marketing Programs</h3>
+    <p>We participate in affiliate marketing programs including Amazon Associates, InsideTracker, Viome, Tru Niagen, Elysium Health, HigherDOSE, NuFace, and Audible. When you click an affiliate link and make a purchase, those companies may collect data about your transaction in accordance with their own privacy policies. We receive commission information only — we do not receive your personal data from affiliate transactions.</p>
+  </div>
+
+  <!-- AI -->
+  <div class="section" id="ai">
+    <span class="section-num">// 08</span>
+    <h2>Artificial Intelligence Services</h2>
+    <p>Evolve The Cosmos operates an AI-powered content automation platform. Our AI infrastructure is built on a local-first architecture, meaning the majority of AI processing occurs on our own hardware rather than third-party cloud services.</p>
+
+    <h3>Local AI Infrastructure</h3>
+    <p>We operate self-hosted AI models including DeepSeek and Qwen language models via Ollama, and image generation via ComfyUI. Data processed through these systems remains on our local infrastructure and is not transmitted to external AI providers.</p>
+
+    <h3>Third-Party AI Services</h3>
+    <p>We use ElevenLabs for AI voice synthesis. Script text is transmitted to ElevenLabs for audio generation. No personal user data is included in these transmissions.</p>
+
+    <h3>Your Right to Opt Out</h3>
+    <p>You have the right to opt out of having your personal information processed by our AI-based services. To exercise this right, contact us at <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a> with your request. We will process your opt-out within 30 days.</p>
+  </div>
+
+  <!-- RETENTION -->
+  <div class="section" id="retention">
+    <span class="section-num">// 09</span>
+    <h2>Data Retention</h2>
+    <p>We retain your personal information for as long as you maintain an active relationship with us — meaning an active email subscription, an active digital product license, or an ongoing service engagement.</p>
+    <p>Purchase records and billing information are retained for a minimum of seven (7) years in accordance with IRS financial record-keeping requirements, regardless of your subscription status.</p>
+    <p>When you request deletion of your data, we will delete or anonymize your personal information within 30 days, except where we are required by law to retain it or where retention is necessary to resolve disputes or enforce our agreements.</p>
+  </div>
+
+  <!-- SECURITY -->
+  <div class="section" id="security">
+    <span class="section-num">// 10</span>
+    <h2>Security</h2>
+    <p>We have implemented appropriate technical and organizational security measures to protect your personal information, including:</p>
+    <ul>
+      <li><strong style="color:var(--white)">Local-First Architecture:</strong> User data processed through our pipeline is handled on our private local cluster infrastructure rather than public cloud services</li>
+      <li><strong style="color:var(--white)">Encrypted Network Tunnels:</strong> All inter-system communication runs through Tailscale encrypted VPN connections</li>
+      <li><strong style="color:var(--white)">Containerized Services:</strong> All services run in isolated Docker containers limiting exposure between systems</li>
+      <li><strong style="color:var(--white)">Credential Management:</strong> Active security hygiene including regular API key rotation and access control reviews</li>
+      <li><strong style="color:var(--white)">No Public LLM Exposure:</strong> Sensitive data is never transmitted to public AI inference endpoints</li>
+    </ul>
+    <div class="warning">
+      <p>Despite our safeguards, no electronic transmission over the internet or information storage technology can be guaranteed to be 100% secure. We cannot promise or guarantee that hackers, cybercriminals, or other unauthorized third parties will not be able to defeat our security and improperly collect, access, steal, or modify your information.</p>
+    </div>
+  </div>
+
+  <!-- RIGHTS -->
+  <div class="section" id="rights">
+    <span class="section-num">// 11</span>
+    <h2>Your Privacy Rights</h2>
+    <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+    <ul>
+      <li><strong style="color:var(--white)">Right to Access:</strong> Request a copy of the personal information we hold about you</li>
+      <li><strong style="color:var(--white)">Right to Rectification:</strong> Request correction of inaccurate or incomplete personal information</li>
+      <li><strong style="color:var(--white)">Right to Erasure:</strong> Request deletion of your personal information, subject to legal retention requirements</li>
+      <li><strong style="color:var(--white)">Right to Restrict Processing:</strong> Request that we limit how we use your personal information</li>
+      <li><strong style="color:var(--white)">Right to Data Portability:</strong> Request a machine-readable copy of your personal information</li>
+      <li><strong style="color:var(--white)">Right to Object:</strong> Object to our processing of your personal information for marketing purposes</li>
+      <li><strong style="color:var(--white)">Right to Opt Out of AI Processing:</strong> Opt out of having your data processed by our AI-based services</li>
+    </ul>
+    <p>To exercise any of these rights, submit a request to <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a>. We will respond within 30 days. You also have the right to appeal our decision — use the same email address to submit an appeal.</p>
+    <p>You may opt out of marketing emails at any time by clicking the unsubscribe link in any email we send you, or by contacting us directly.</p>
+  </div>
+
+  <!-- CALIFORNIA -->
+  <div class="section" id="california">
+    <span class="section-num">// 12</span>
+    <h2>California Privacy Rights</h2>
+    <p>If you are a California resident, the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA) grant you specific rights regarding your personal information.</p>
+
+    <h3>Categories of Personal Information Collected</h3>
+    <p>In the last 12 months, we have collected the following categories of personal information as defined by the California Customer Records statute:</p>
+    <ul>
+      <li>Identifiers (name, email address)</li>
+      <li>California Customer Records personal information (name, billing address, financial information)</li>
+      <li>Commercial information (purchase history, products obtained)</li>
+      <li>Internet or other electronic network activity — <strong style="color:var(--white)">Not collected</strong></li>
+      <li>Geolocation data — <strong style="color:var(--white)">Not collected</strong></li>
+      <li>Biometric information — <strong style="color:var(--white)">Not collected</strong></li>
+      <li>Sensitive personal information — <strong style="color:var(--white)">Not collected</strong></li>
+    </ul>
+
+    <h3>Shine the Light Law</h3>
+    <p>California Civil Code Section 1798.83 permits California residents to request information about our disclosure of personal information to third parties for direct marketing purposes. If you are a California resident and wish to make such a request, contact us at <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a>.</p>
+
+    <h3>Do Not Sell or Share</h3>
+    <p>We do not sell or share your personal information as defined under the CCPA/CPRA. We do not use or disclose sensitive personal information for purposes other than those specified in this policy.</p>
+  </div>
+
+  <!-- US STATES -->
+  <div class="section" id="usstates">
+    <span class="section-num">// 13</span>
+    <h2>US State Privacy Laws</h2>
+    <p>This Privacy Policy is designed to comply with all currently enacted US state privacy laws, including but not limited to:</p>
+    <ul>
+      <li>CCPA + CPRA (California)</li>
+      <li>CPA (Colorado)</li>
+      <li>CTDPA (Connecticut)</li>
+      <li>DPDPA (Delaware)</li>
+      <li>FDBR (Florida)</li>
+      <li>ICDPA (Indiana & Iowa)</li>
+      <li>KCDPA (Kentucky)</li>
+      <li>MODPA (Maryland)</li>
+      <li>MCDPA (Minnesota & Montana)</li>
+      <li>NDPA (Nebraska)</li>
+      <li>NHPA (New Hampshire)</li>
+      <li>NJDPA (New Jersey)</li>
+      <li>OCPA (Oregon)</li>
+      <li>RIDTPPA (Rhode Island)</li>
+      <li>TIPA (Tennessee)</li>
+      <li>TDPSA (Texas)</li>
+      <li>UCPA (Utah)</li>
+      <li>VCDPA (Virginia)</li>
+    </ul>
+    <p>Residents of these states have the right to access, correct, delete, and opt out of the sale or sharing of their personal information. To exercise these rights, contact us at <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a>. We will respond within the timeframe required by your state's applicable law.</p>
+  </div>
+
+  <!-- GDPR -->
+  <div class="section" id="gdpr">
+    <span class="section-num">// 14</span>
+    <h2>EU & UK Rights (GDPR)</h2>
+    <p>If you are located in the European Economic Area (EEA) or United Kingdom, you have rights under the General Data Protection Regulation (GDPR) and the UK GDPR respectively.</p>
+
+    <h3>Legal Basis for Processing</h3>
+    <ul>
+      <li><strong style="color:var(--white)">Contract Performance:</strong> Processing necessary to fulfill your digital product purchase or service agreement</li>
+      <li><strong style="color:var(--white)">Legitimate Interests:</strong> Processing necessary for our business operations where not overridden by your rights</li>
+      <li><strong style="color:var(--white)">Consent:</strong> Processing based on your explicit consent, such as email marketing subscriptions</li>
+      <li><strong style="color:var(--white)">Legal Obligation:</strong> Processing required to comply with applicable law</li>
+    </ul>
+
+    <h3>Your GDPR Rights</h3>
+    <p>You have the right to access, rectify, erase, restrict, and port your personal data, and to object to its processing. You also have the right to withdraw consent at any time where processing is based on consent, without affecting the lawfulness of prior processing.</p>
+
+    <h3>Data Transfers</h3>
+    <p>Your personal information may be transferred to and processed in the United States, which may not provide the same level of data protection as your home country. We implement appropriate safeguards for such transfers in accordance with applicable law.</p>
+
+    <h3>Right to Lodge a Complaint</h3>
+    <p>You have the right to lodge a complaint with your local data protection supervisory authority. EU residents may also use the European Commission's Online Dispute Resolution platform at <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>.</p>
+  </div>
+
+  <!-- CHILDREN -->
+  <div class="section" id="children">
+    <span class="section-num">// 15</span>
+    <h2>Children's Privacy</h2>
+    <p>Our Site and services are not directed to individuals under the age of 18. We do not knowingly collect personal information from children under 18. We do not knowingly collect personal information from children under 13 as defined under the Children's Online Privacy Protection Act (COPPA).</p>
+    <p>If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately at <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a>. We will promptly delete such information from our records.</p>
+  </div>
+
+  <!-- UPDATES -->
+  <div class="section" id="updates">
+    <span class="section-num">// 16</span>
+    <h2>Updates to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. When we make material changes, we will notify you by sending an email to the address associated with your account or subscription from <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a>.</p>
+    <p>The updated policy will be effective as of the date indicated at the top of this page. Your continued use of the Site after the effective date constitutes your acceptance of the updated policy.</p>
+    <p>We encourage you to review this Privacy Policy periodically to stay informed about how we protect your information.</p>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section" id="contact">
+    <span class="section-num">// 17</span>
+    <h2>Contact Us</h2>
+    <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+    <div class="contact-block">
+      <p>
+        <strong style="color:var(--white);letter-spacing:2px;font-size:14px;">EVOLVE THE COSMOS LLC</strong><br><br>
+        3450 Northwest 85th Court, Suite 422<br>
+        Doral, Florida 33122<br>
+        United States<br><br>
+        Email: <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a><br>
+        Website: <a href="https://evolvethecosmos.com">evolvethecosmos.com</a>
+      </p>
+    </div>
+    <p style="margin-top:24px;">We will respond to all privacy requests within <strong style="color:var(--white)">30 days</strong> of receipt. If you are not satisfied with our response, you have the right to appeal by contacting us at the same email address with "PRIVACY APPEAL" in the subject line.</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Evolve The Cosmos LLC. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms & Conditions</a>
+  </div>
+</footer>
+
+<!-- Evolve The Cosmos | Privacy Policy | evolvethecosmos.com/privacy-policy -->
+</body>
+</html>

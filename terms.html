@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms and Conditions — Evolve The Cosmos</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000;
+    --deep: #030308;
+    --cosmic: #0a0a1a;
+    --accent: #00f5ff;
+    --accent2: #7b2fff;
+    --gold: #ffd700;
+    --white: #e8e8f0;
+    --dim: #6b6b8a;
+    --body: #a0a0bc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--body);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  /* Grid overlay */
+  .grid-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,245,255,0.1);
+    background: rgba(3,3,8,0.95);
+    backdrop-filter: blur(20px);
+  }
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .logo span { color: var(--gold); }
+  .nav-right {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* HERO HEADER */
+  .doc-header {
+    position: relative;
+    z-index: 1;
+    padding: 80px 48px 64px;
+    border-bottom: 1px solid rgba(0,245,255,0.1);
+    background: linear-gradient(180deg, rgba(0,245,255,0.03) 0%, transparent 100%);
+  }
+  .doc-tag {
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .doc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    line-height: 1.1;
+  }
+  .doc-title span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .doc-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .doc-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .doc-meta-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .doc-meta-value {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* LAYOUT */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 48px 120px;
+  }
+
+  /* TOC */
+  .toc {
+    background: rgba(0,245,255,0.03);
+    border: 1px solid rgba(0,245,255,0.1);
+    border-left: 3px solid var(--accent);
+    padding: 40px;
+    margin-bottom: 80px;
+  }
+  .toc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 8px 40px;
+  }
+  .toc ol li {
+    counter-increment: toc;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .toc ol li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+    flex-shrink: 0;
+  }
+  .toc ol li a {
+    color: var(--body);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .toc ol li a:hover { color: var(--accent); }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 72px;
+    padding-bottom: 72px;
+    border-bottom: 1px solid rgba(0,245,255,0.06);
+  }
+  .section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .section-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 32px 0 12px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: var(--body);
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  ul, ol {
+    margin: 16px 0 24px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  ul li, ol li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-size: 15px;
+    color: var(--body);
+    line-height: 1.7;
+  }
+
+  ul li::before {
+    content: '//';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    top: 10px;
+  }
+
+  ol {
+    counter-reset: list;
+  }
+  ol li {
+    counter-increment: list;
+  }
+  ol li::before {
+    content: counter(list, decimal-leading-zero) '.';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    top: 10px;
+  }
+
+  /* Highlight box */
+  .highlight {
+    background: rgba(0,245,255,0.04);
+    border-left: 3px solid var(--accent);
+    padding: 24px 32px;
+    margin: 24px 0;
+  }
+  .highlight p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--white);
+  }
+
+  .warning {
+    background: rgba(255,215,0,0.04);
+    border-left: 3px solid var(--gold);
+    padding: 24px 32px;
+    margin: 24px 0;
+  }
+  .warning p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--white);
+  }
+
+  /* Contact block */
+  .contact-block {
+    background: rgba(123,47,255,0.06);
+    border: 1px solid rgba(123,47,255,0.2);
+    padding: 40px;
+    margin-top: 32px;
+  }
+  .contact-block p { margin: 0; }
+  .contact-block a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,245,255,0.3);
+    transition: border-color 0.2s;
+  }
+  .contact-block a:hover { border-color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 40px 48px;
+    border-top: 1px solid rgba(0,245,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: rgba(3,3,8,0.8);
+  }
+  footer p {
+    color: var(--dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a {
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  a { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .doc-header { padding: 60px 24px 48px; }
+    .container { padding: 60px 24px 80px; }
+    .toc ol { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+
+<nav>
+  <a href="/" class="logo">Evolve <span>The</span> Cosmos</a>
+  <span class="nav-right">Legal Documents</span>
+</nav>
+
+<div class="doc-header">
+  <span class="doc-tag">// Legal Terms</span>
+  <h1 class="doc-title">Terms and<br><span>Conditions</span></h1>
+  <div class="doc-meta">
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Last Updated</span>
+      <span class="doc-meta-value">February 25, 2026</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Effective Date</span>
+      <span class="doc-meta-value">February 25, 2026</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Jurisdiction</span>
+      <span class="doc-meta-value">Florida, United States</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Entity</span>
+      <span class="doc-meta-value">Evolve The Cosmos LLC</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">// Table of Contents</div>
+    <ol>
+      <li><a href="#agreement">Agreement to Terms</a></li>
+      <li><a href="#services">Our Services</a></li>
+      <li><a href="#ip">Intellectual Property</a></li>
+      <li><a href="#prohibited">Prohibited Activities</a></li>
+      <li><a href="#products">Digital Products</a></li>
+      <li><a href="#payments">Payments</a></li>
+      <li><a href="#refunds">Returns & Refunds</a></li>
+      <li><a href="#thirdparty">Third-Party Links</a></li>
+      <li><a href="#disclaimer">Disclaimer</a></li>
+      <li><a href="#liability">Limitation of Liability</a></li>
+      <li><a href="#indemnification">Indemnification</a></li>
+      <li><a href="#disputes">Dispute Resolution</a></li>
+      <li><a href="#governing">Governing Law</a></li>
+      <li><a href="#eu">EU & UK Users</a></li>
+      <li><a href="#updates">Updates to Terms</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <!-- AGREEMENT -->
+  <div class="section" id="agreement">
+    <span class="section-num">// 01</span>
+    <h2>Agreement to Terms</h2>
+    <p>These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you"), and Evolve The Cosmos LLC ("Company," "we," "us," or "our"), concerning your access to and use of the evolvethecosmos.com website as well as any other media form, media channel, mobile website, or mobile application related, linked, or otherwise connected thereto (collectively, the "Site").</p>
+    <div class="highlight">
+      <p>By accessing the Site, you confirm that you are at least 18 years of age, have read and understood these Terms, and agree to be bound by them. If you do not agree with all of these Terms, you are expressly prohibited from using the Site and must discontinue use immediately.</p>
+    </div>
+    <p>Supplemental terms and conditions or documents that may be posted on the Site from time to time are hereby expressly incorporated herein by reference. We reserve the right to make changes or modifications to these Terms at any time and for any reason.</p>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="section" id="services">
+    <span class="section-num">// 02</span>
+    <h2>Our Services</h2>
+    <p>Evolve The Cosmos LLC is an AI-powered content and digital products platform focused on cognitive evolution, neuroscience, and technology. We provide the following services:</p>
+    <ul>
+      <li>Educational digital content, tools, and automation blueprints for personal and internal business use</li>
+      <li>AI automation consulting services for small businesses</li>
+      <li>Digital products including but not limited to dashboards, guides, templates, and course materials</li>
+      <li>Content published on third-party platforms including YouTube and TikTok</li>
+      <li>Affiliate recommendations for third-party products and services</li>
+    </ul>
+    <p>We reserve the right to modify, suspend, or discontinue any service at any time without notice. We shall not be liable to you or any third party for any such modification, suspension, or discontinuation.</p>
+  </div>
+
+  <!-- IP -->
+  <div class="section" id="ip">
+    <span class="section-num">// 03</span>
+    <h2>Intellectual Property</h2>
+    <p>Unless otherwise indicated, the Site and all its content — including but not limited to source code, databases, functionality, software, website designs, audio, video, text, photographs, graphics, automation workflows, and scripts — are owned or controlled by us and are protected by copyright, trademark, and other intellectual property laws.</p>
+    <p>The content on our Site is provided for your personal and internal business use only. You are granted a limited, non-exclusive, non-transferable license to access and use the Site and download or print content solely for your personal or internal business purposes.</p>
+    <div class="warning">
+      <p>You may not reproduce, distribute, resell, modify, create derivative works, publicly display, publicly perform, republish, download, store, or transmit any of our material without our prior written consent. This expressly includes all digital products, automation blueprints, scripts, and content purchased from our platform.</p>
+    </div>
+  </div>
+
+  <!-- PROHIBITED -->
+  <div class="section" id="prohibited">
+    <span class="section-num">// 04</span>
+    <h2>Prohibited Activities</h2>
+    <p>You may not access or use the Site for any purpose other than that for which we make it available. As a user of the Site, you agree not to:</p>
+    <ul>
+      <li>Use the Services to advertise or offer to sell goods and services without our prior written consent</li>
+      <li>Reproduce, distribute, or resell any digital products or content purchased from this platform</li>
+      <li>Use our content, automation systems, or workflows to train AI models without explicit written consent</li>
+      <li>Reverse engineer, decompile, or attempt to extract source code from any digital products</li>
+      <li>Misrepresent affiliation with Evolve The Cosmos or impersonate the Company</li>
+      <li>Use the Site in any way that violates applicable federal, state, local, or international law</li>
+      <li>Transmit any unsolicited or unauthorized advertising or promotional material</li>
+      <li>Engage in any automated use of the system, such as using scripts to send comments or messages</li>
+      <li>Attempt to bypass any measures of the Site designed to prevent or restrict access</li>
+      <li>Upload or transmit (or attempt to upload or to transmit) viruses or any other disruptive material</li>
+      <li>Harass, annoy, intimidate, or threaten any of our employees, agents, or other users</li>
+    </ul>
+  </div>
+
+  <!-- DIGITAL PRODUCTS -->
+  <div class="section" id="products">
+    <span class="section-num">// 05</span>
+    <h2>Digital Products</h2>
+    <p>All digital products sold through our platform are provided for personal and internal business use only. Upon purchase, you receive a limited, non-exclusive, non-transferable license to use the purchased digital product in accordance with these Terms.</p>
+
+    <h3>License Restrictions</h3>
+    <ul>
+      <li>You may not share, resell, redistribute, or sublicense digital products to any third party</li>
+      <li>You may not use purchased content to create competing products or services</li>
+      <li>Access to digital products is granted to the individual purchaser only</li>
+    </ul>
+
+    <h3>Delivery</h3>
+    <p>Digital products are delivered electronically upon confirmation of payment. Delivery is typically immediate or within 24 hours. We are not responsible for delivery failures caused by incorrect contact information provided by the purchaser.</p>
+
+    <h3>Affiliate Disclosures</h3>
+    <p>Some links on our Site and in our content are affiliate links. This means we may earn a commission if you click through and make a purchase, at no additional cost to you. We only recommend products and services we believe provide genuine value. All affiliate relationships are disclosed in accordance with FTC guidelines.</p>
+  </div>
+
+  <!-- PAYMENTS -->
+  <div class="section" id="payments">
+    <span class="section-num">// 06</span>
+    <h2>Payments</h2>
+    <p>We accept the following forms of payment: Visa, Mastercard, American Express, Discover, PayPal, Apple Pay, and Google Pay. All transactions are processed in US Dollars (USD).</p>
+    <p>Payment processing is handled by third-party processors including Stripe and Gumroad. By making a purchase, you agree to provide current, complete, and accurate purchase and account information. You agree to promptly update account and payment information so that we can complete your transactions.</p>
+    <div class="highlight">
+      <p>We reserve the right to refuse any order placed through the Site. We may, in our sole discretion, limit or cancel quantities purchased per person, per household, or per order.</p>
+    </div>
+  </div>
+
+  <!-- REFUNDS -->
+  <div class="section" id="refunds">
+    <span class="section-num">// 07</span>
+    <h2>Returns & Refunds</h2>
+    <p>Due to the nature of digital products, all sales are generally final once the product has been accessed or downloaded.</p>
+
+    <h3>Refund Eligibility</h3>
+    <p>Refunds may be granted within <strong style="color:var(--white)">14 days</strong> of purchase under the following conditions:</p>
+    <ul>
+      <li>The digital product is materially defective or non-functional</li>
+      <li>The product is significantly different from its description at the time of purchase</li>
+      <li>You have not yet accessed, downloaded, or used the digital product</li>
+    </ul>
+
+    <h3>How to Request a Refund</h3>
+    <p>To request a refund, contact us at <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a> within 14 days of purchase. Include your order details, the reason for the request, and any relevant documentation. We will respond within 5 business days.</p>
+
+    <h3>EU & UK Customers</h3>
+    <p>Customers located in the European Union or United Kingdom retain their statutory rights, including the 14-day right of withdrawal for digital content where applicable under the Consumer Rights Directive and the Consumer Rights Act 2015 respectively, provided the digital content has not been accessed or downloaded.</p>
+
+    <p>For our full Return Policy, visit: <a href="/returns">evolvethecosmos.com/returns</a></p>
+  </div>
+
+  <!-- THIRD PARTY -->
+  <div class="section" id="thirdparty">
+    <span class="section-num">// 08</span>
+    <h2>Third-Party Links & Affiliates</h2>
+    <p>The Site may contain links to third-party websites, products, or services, including affiliate links. These links are provided for your convenience and information only.</p>
+    <div class="warning">
+      <p>We have no control over the content, privacy policies, or practices of third-party sites and assume no responsibility for them. Linking to a third-party website does not imply endorsement beyond any disclosed affiliate relationship. You visit third-party sites at your own risk and subject to their own terms and conditions.</p>
+    </div>
+    <p>We are not responsible for examining or evaluating the content or accuracy of third-party materials, and we will not have any liability or responsibility for any third-party materials or websites, or for any other materials, products, or services of third parties.</p>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="section" id="disclaimer">
+    <span class="section-num">// 09</span>
+    <h2>Disclaimer of Warranties</h2>
+    <p>THE SITE IS PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. YOU AGREE THAT YOUR USE OF THE SITE AND OUR SERVICES WILL BE AT YOUR SOLE RISK. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, IN CONNECTION WITH THE SITE AND YOUR USE THEREOF.</p>
+    <p>We make no warranties or representations about the accuracy or completeness of the Site's content or the content of any websites linked to the Site. We will assume no liability or responsibility for any errors, mistakes, or inaccuracies of content, personal injury or property damage resulting from your access to and use of the Site, or any unauthorized access to our secure servers.</p>
+    <p>Results described in our content, products, or services are not guaranteed and may vary based on individual effort, experience, and market conditions. Educational content is provided for informational purposes only and does not constitute professional financial, legal, or medical advice.</p>
+  </div>
+
+  <!-- LIABILITY -->
+  <div class="section" id="liability">
+    <span class="section-num">// 10</span>
+    <h2>Limitation of Liability</h2>
+    <p>IN NO EVENT WILL WE OR OUR DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES.</p>
+    <div class="highlight">
+      <p>OUR LIABILITY TO YOU FOR ANY CAUSE WHATSOEVER, REGARDLESS OF THE FORM OF THE ACTION, WILL AT ALL TIMES BE LIMITED TO THE AMOUNT PAID, IF ANY, BY YOU TO US DURING THE TRANSACTION GIVING RISE TO THE CLAIM. Certain US state laws and international laws do not allow limitations on implied warranties or the exclusion or limitation of certain damages. If these laws apply to you, some or all of the above disclaimers or limitations may not apply to you.</p>
+    </div>
+    <p>Any cause of action or claim you may have arising out of or relating to these Terms or the Site must be commenced within one (1) year after the cause of action accrues, otherwise, such cause of action or claim is permanently barred.</p>
+  </div>
+
+  <!-- INDEMNIFICATION -->
+  <div class="section" id="indemnification">
+    <span class="section-num">// 11</span>
+    <h2>Indemnification</h2>
+    <p>You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys' fees and expenses, made by any third party due to or arising out of:</p>
+    <ul>
+      <li>Your use of the Site or our Services</li>
+      <li>Your breach of these Terms and Conditions</li>
+      <li>Any breach of your representations and warranties set forth in these Terms</li>
+      <li>Your violation of the rights of a third party, including but not limited to intellectual property rights</li>
+      <li>Any harmful act toward any other user of the Site</li>
+    </ul>
+  </div>
+
+  <!-- DISPUTES -->
+  <div class="section" id="disputes">
+    <span class="section-num">// 12</span>
+    <h2>Dispute Resolution</h2>
+
+    <h3>Informal Negotiations</h3>
+    <p>To expedite resolution and control the cost of any dispute, controversy, or claim related to these Terms (each a "Dispute"), the parties agree to first attempt to negotiate any Dispute informally for at least <strong style="color:var(--white)">thirty (30) days</strong> before initiating arbitration. Such informal negotiations commence upon written notice from one party to the other at: <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a>.</p>
+
+    <h3>Binding Arbitration</h3>
+    <p>If the parties are unable to resolve a Dispute through informal negotiations, the Dispute shall be finally and exclusively resolved by binding arbitration. The arbitration shall be commenced and conducted in the State of <strong style="color:var(--white)">Florida, United States</strong>. The arbitration may be conducted in person, through the submission of documents, by phone, or online. The arbitrator will make a decision in writing.</p>
+
+    <div class="highlight">
+      <p>We agree to pay arbitration fees if they are deemed excessive. Each party shall bear its own costs and attorneys' fees unless the arbitrator finds that a claim or defense was frivolous or asserted for an improper purpose.</p>
+    </div>
+
+    <h3>Restrictions</h3>
+    <p>The parties agree that any arbitration shall be limited to the Dispute between the parties individually. To the full extent permitted by law, no arbitration shall be joined with any other proceeding; there is no right or authority for any Dispute to be arbitrated on a class-action basis.</p>
+
+    <h3>Exceptions</h3>
+    <p>The parties agree that the following Disputes are not subject to the above provisions: any Disputes seeking to enforce or protect intellectual property rights, any Dispute related to allegations of theft, piracy, invasion of privacy, or unauthorized use, and any claim for injunctive relief.</p>
+
+    <h3>If Arbitration Fails</h3>
+    <p>If a Dispute proceeds to court rather than arbitration, such action shall be brought in the state and federal courts located in <strong style="color:var(--white)">Florida, United States</strong>, and the parties hereby consent to the personal jurisdiction of such courts.</p>
+  </div>
+
+  <!-- GOVERNING LAW -->
+  <div class="section" id="governing">
+    <span class="section-num">// 13</span>
+    <h2>Governing Law</h2>
+    <p>These Terms shall be governed by and defined following the laws of the State of <strong style="color:var(--white)">Florida, United States</strong>. Evolve The Cosmos LLC and yourself irrevocably consent that the courts of Florida shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these Terms.</p>
+  </div>
+
+  <!-- EU & UK -->
+  <div class="section" id="eu">
+    <span class="section-num">// 14</span>
+    <h2>EU & UK User Rights</h2>
+    <p>If you are a consumer located in the European Union or United Kingdom, you may have additional rights under applicable consumer protection laws that cannot be waived by contract.</p>
+
+    <h3>Right of Withdrawal</h3>
+    <p>EU and UK consumers have the right to withdraw from a purchase of digital content within 14 days of purchase, provided the digital content has not been accessed or downloaded. Once you have accessed or downloaded the content, you expressly acknowledge that you waive your right of withdrawal.</p>
+
+    <h3>Conformity of Digital Content</h3>
+    <p>We warrant that all digital products conform to their description at the time of purchase. If a digital product is defective or does not conform to its description, you have the right to request a remedy in accordance with applicable EU and UK consumer law.</p>
+
+    <h3>Online Dispute Resolution</h3>
+    <p>EU consumers may also utilize the European Commission's Online Dispute Resolution platform available at: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>.</p>
+  </div>
+
+  <!-- UPDATES -->
+  <div class="section" id="updates">
+    <span class="section-num">// 15</span>
+    <h2>Updates to These Terms</h2>
+    <p>We reserve the right to update and change these Terms and Conditions at any time. We will notify you of any material changes by sending an email notification to the address associated with your purchase or subscription at <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a>.</p>
+    <p>Your continued use of the Site after the effective date of the revised Terms constitutes your acceptance of the changes. We encourage you to review these Terms periodically to stay informed of updates.</p>
+    <p>The date these Terms were last revised is identified at the top of this page.</p>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section" id="contact">
+    <span class="section-num">// 16</span>
+    <h2>Contact Us</h2>
+    <p>In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at:</p>
+    <div class="contact-block">
+      <p><strong style="color:var(--white);letter-spacing:2px;font-size:14px;">EVOLVE THE COSMOS LLC</strong><br><br>
+      3450 Northwest 85th Court, Suite 422<br>
+      Doral, Florida 33122<br>
+      United States<br><br>
+      Email: <a href="mailto:support@evolvethecosmos.com">support@evolvethecosmos.com</a><br>
+      Website: <a href="https://evolvethecosmos.com">evolvethecosmos.com</a>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Evolve The Cosmos LLC. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms & Conditions</a>
+  </div>
+</footer>
+
+<!-- Evolve The Cosmos | Terms and Conditions | evolvethecosmos.com/terms -->
+</body>
+</html>
